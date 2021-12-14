@@ -21,6 +21,15 @@ void imprimir_lista(No *L){
     printf("%c",q->dado);
     q=q->prox;
   }
+  printf("\n");
+}
+
+void substituir_na_lista(No *L, int a, int b) {
+  No *q=L;
+  while(q!=NULL){
+    if(q->dado==a)q->dado=b;
+    q=q->prox;
+  }
 }
 
 int lista_esta_vazia(No **L){
@@ -75,3 +84,21 @@ void remover_inicio(No **p) {// p recebe &L
   *p = q->prox;
   free(q);
 }
+
+void adicionar_lista_final(No **A, No **B){
+  while(!lista_esta_vazia(B)){
+    int elem_inicio=obter_inicio(B);
+    remover_inicio(B);
+    adicionar_final(A,elem_inicio);
+  }
+}
+
+void adicionar_lista_inicio(No **A, No **B){
+  inverter_lista(B);
+  while(!lista_esta_vazia(B)){
+    int elem_inicio=obter_inicio(B);
+    remover_inicio(B);
+    adicionar_inicio(A,elem_inicio);
+  }
+}
+

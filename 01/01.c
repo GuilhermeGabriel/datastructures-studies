@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "lista.h"
 
 int main(){
@@ -7,64 +8,46 @@ int main(){
   No *LTmp=criar_lista();
   No *LFinal=criar_lista();
 
-  while(scanf("%c",&tmp),tmp!='$'){
-    if(tmp=='['){
+  while(scanf("%c",&tmp),tmp!='\n'){
+    if(tmp=='['||tmp==']'||tmp=='$'){
       if(onde_add=='I'){
         if(lista_esta_vazia(&LFinal)){
-          while(!lista_esta_vazia(&LTmp)){
-            int elem_inicio=obter_inicio(&LTmp);
-            remover_inicio(&LTmp);
-            adicionar_final(&LFinal,elem_inicio);
-          }
+          adicionar_lista_final(&LFinal,&LTmp);
         }else{
-          inverter_lista(&LTmp);
-          while(!lista_esta_vazia(&LTmp)){
-            int elem_inicio=obter_inicio(&LTmp);
-            remover_inicio(&LTmp);
-            adicionar_inicio(&LFinal,elem_inicio);
-          }
+          adicionar_lista_inicio(&LFinal,&LTmp);
         }
       }
       if(onde_add=='F'){
-        // while(!lista_esta_vazia(&LTmp)){
-        //   int elem_inicio=obter_inicio(&LTmp);
-        //   remover_inicio(&LTmp);
-        //   adicionar_final(&LFinal,elem_inicio);
-        // }
+        adicionar_lista_final(&LFinal,&LTmp);
       }
-      onde_add='I';
+      
+      if(tmp=='[')onde_add='I';
+      if(tmp==']')onde_add='F';
+
       destruir_lista(&LTmp);
       continue;
     }
 
     adicionar_final(&LTmp,tmp);
   }
-/*
-    if(tmp==']'){
-      if(onde_add=='I'){
-        //adicionar a lista temporario no inicio da lista geral
-      }
-      if(onde_add=='F'){
-        //adicionar a lista temporario no final da lista geral
-      }
 
-      onde_add='F';
-      //limpar a temp
-      //continue;
+  int inverter=0;
+  char *comando=(char*)malloc(15*sizeof(15));
+  while(scanf(" %[^\n]",comando),strcmp(comando,"FIM")!=0){
+    if(comando[0]=='S'){
+      substituir_na_lista(LFinal,comando[11],comando[13]);
     }
-*/
-   /* adicionar_final(&LTmp,tmp);
-    //adicionar_inicio(LTmp,tmp);
-  }*/
 
-  //tem q ter o bagui pra caso n houver ] ou [
-  //if()
-  //inverter_lista(&LTmp);
+    if(comando[0]=='I'){
+      inverter_lista(&LFinal);
+    }
+  }
+
   imprimir_lista(LFinal);
-  //printf("\n%c",obter_inicio(&LTmp));
-  //printf("%d",tamanho_lista(LTmp));
+
+  free(comando);
+  destruir_lista(&LTmp);
+  destruir_lista(&LFinal);
 
   return 0;
 }
-
-//O sapo na[o lava o p[$
