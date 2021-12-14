@@ -11,31 +11,27 @@ int main(){
   while(scanf("%c",&tmp),tmp!='\n'){
     if(tmp=='['||tmp==']'||tmp=='$'){
       if(onde_add=='I'){
-        if(lista_esta_vazia(&LFinal)){
-          adicionar_lista_final(&LFinal,&LTmp);
-        }else{
-          adicionar_lista_inicio(&LFinal,&LTmp);
-        }
+        concatenar_lista_inicio(&LFinal,&LTmp);
       }
       if(onde_add=='F'){
-        adicionar_lista_final(&LFinal,&LTmp);
+        concatenar_lista_final(&LFinal,&LTmp);
       }
       
       if(tmp=='[')onde_add='I';
       if(tmp==']')onde_add='F';
 
       destruir_lista(&LTmp);
+
       continue;
     }
 
-    adicionar_final(&LTmp,tmp);
+    adicionar_noh_final(&LTmp,tmp);
   }
 
-  int inverter=0;
-  char *comando=(char*)malloc(15*sizeof(15));
+  char *comando=(char*)malloc(15*sizeof(char));
   while(scanf(" %[^\n]",comando),strcmp(comando,"FIM")!=0){
     if(comando[0]=='S'){
-      substituir_na_lista(LFinal,comando[11],comando[13]);
+      substituir_elemento_na_lista(LFinal,comando[11],comando[13]);
     }
 
     if(comando[0]=='I'){

@@ -24,7 +24,7 @@ void imprimir_lista(No *L){
   printf("\n");
 }
 
-void substituir_na_lista(No *L, int a, int b) {
+void substituir_elemento_na_lista(No *L, int a, int b) {
   No *q=L;
   while(q!=NULL){
     if(q->dado==a)q->dado=b;
@@ -51,7 +51,7 @@ void inverter_lista(No **L){
   *L=ant;
 }
 
-void adicionar_final(No **L,int x) {// p recebe &L
+void adicionar_noh_final(No **L,int x) {
   No *aux,*q;
   q=(No*)malloc(sizeof(No));
   q->dado=x;
@@ -64,7 +64,7 @@ void adicionar_final(No **L,int x) {// p recebe &L
   }
 }
 
-void adicionar_inicio(No **L,int x) {// p recebe &L
+void adicionar_noh_inicio(No **L,int x) {
   No *q;
   q=(No*)malloc(sizeof(No));
   q->dado=x;
@@ -78,27 +78,31 @@ int obter_inicio(No **p){
   return q->dado;
 }
 
-void remover_inicio(No **p) {// p recebe &L
+void remover_inicio(No **p) {
   No* q=*p;
   if(q==NULL) return;
   *p = q->prox;
   free(q);
 }
 
-void adicionar_lista_final(No **A, No **B){
+void concatenar_lista_final(No **A, No **B){
   while(!lista_esta_vazia(B)){
     int elem_inicio=obter_inicio(B);
     remover_inicio(B);
-    adicionar_final(A,elem_inicio);
+    adicionar_noh_final(A,elem_inicio);
   }
 }
 
-void adicionar_lista_inicio(No **A, No **B){
-  inverter_lista(B);
-  while(!lista_esta_vazia(B)){
-    int elem_inicio=obter_inicio(B);
-    remover_inicio(B);
-    adicionar_inicio(A,elem_inicio);
-  }
+void concatenar_lista_inicio(No **A, No **B){
+  if(lista_esta_vazia(A)){
+    concatenar_lista_final(A,B);
+  }else{
+    inverter_lista(B);
+    while(!lista_esta_vazia(B)){
+      int elem_inicio=obter_inicio(B);
+      remover_inicio(B);
+      adicionar_noh_inicio(A,elem_inicio);
+    }
+  }  
 }
 

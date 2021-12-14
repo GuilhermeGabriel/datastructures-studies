@@ -1,5 +1,2 @@
-O sapo [nao la]va o pe$
-SUBSTITUIR a u
-SUBSTITUIR p X 
-INVERTER
+O sapo na[o lava o p]e$
 FIM

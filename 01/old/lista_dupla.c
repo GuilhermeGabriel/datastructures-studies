@@ -28,7 +28,7 @@ void imprimir_lista(No *p){ // p recebe L
   printf("NULL\n");
 }
 
-void adicionar_inicio(No **p, char c){ //p recebe &L
+void adicionar_noh_inicio(No **p, char c){ //p recebe &L
   No *q=(No*)malloc(sizeof(No));
   q->dado=c;
   if(*p==NULL){ //lista vazia
@@ -44,7 +44,7 @@ void adicionar_inicio(No **p, char c){ //p recebe &L
   }
 }
 
-void adicionar_final(No **p, char c){ // p recebe L
+void adicionar_noh_final(No **p, char c){ // p recebe L
   No *q=(No*)malloc(sizeof(No));
   q->dado=c;
   if(*p==NULL){ //lista vazia

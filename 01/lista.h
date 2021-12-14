@@ -7,16 +7,17 @@ typedef struct no {
 } No;
 
 No* criar_lista();
-void destruir_lista(No **L);
-void imprimir_lista(No *L);
-void adicionar_final(No **L,int x);
-void adicionar_inicio(No **L,int x);
+
 void inverter_lista(No **p);
+void imprimir_lista(No *L);
+void destruir_lista(No **L);
 int lista_esta_vazia(No **L);
-void substituir_na_lista(No *L, int a, int b);
+void adicionar_noh_final(No **L,int x);
+void adicionar_noh_inicio(No **L,int x);
 int obter_inicio(No **p);
-void adicionar_lista_final(No **A, No **B);
-void adicionar_lista_inicio(No **A, No **B);
 void remover_inicio(No **p);
-int tamanho_lista(No *L);
+void concatenar_lista_final(No **A, No **B);
+void concatenar_lista_inicio(No **A, No **B);
+void substituir_elemento_na_lista(No *L, int a, int b);
+
 #endif
