@@ -76,12 +76,13 @@ int main(){
     }
   }
 
-  // Libera da memoria o array de char que armazena o comando e o site
+  // Libera da memoria o array de char que armazena o comando e o link do site
   free(comando);
   free(site);
-  // Libera da memoria a pilha de paginas e o buffer
+  // Libera da memoria a pilha de paginas e o pilha de buffer
   pilha_liberar(&Pags);
   pilha_liberar(&Buffer);
 
+  // Encerra o programa
   return 0;
 }
