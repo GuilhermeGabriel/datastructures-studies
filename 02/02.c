@@ -50,6 +50,15 @@ int main(){
       pilha_inserir(Buffer,pilha_valor_topo(Pags));
       // Remove a ultima pagina acessada da pilha de paginas
       pilha_remover(Pags);
+      
+      // Se a pilha de paginas ficou vazia, volta 
+      // o topo do buffer para a pilha de paginas
+      if(pilha_vazia(Pags)){
+        // Insere no topo da pilha de paginas o topo do buffer
+        pilha_inserir(Pags,pilha_valor_topo(Buffer));
+        // Remove o topo do buffer
+        pilha_remover(Buffer);
+      }      
     }
 
     // Se o comando for de avancar uma pagina
@@ -72,7 +81,7 @@ int main(){
       pilha_imprimir_ordem_natural(Buffer);
 
       // Printa uma quebra de linha para formatacao
-      printf("\n");
+      if(!pilha_vazia(Pags))printf("\n");
     }
   }
 

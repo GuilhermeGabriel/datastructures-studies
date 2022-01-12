@@ -17,11 +17,19 @@ void cria_lista(Lista **l);
 
 // Definicao de uma funcao que 
 // insere no comeco de uma lista
-void insere_comeco(Lista *l, char* valor);
+void lista_insere_comeco(Lista *l, char* valor);
+
+// Definicao de uma funcao que
+// retorna o valor que está no comeco da lista
+char* lista_valor_comeco(Lista* l);
 
 // Definicao de uma funcao que remove
 // o comeco de uma lista
-void remove_comeco(Lista *l);
+void lista_remove_comeco(Lista *l);
 
 // Definicao de uma funcao que libera uma lista
 void libera_lista(Lista **l);
+
+// Definicao de uma funcao que retorna se
+// uma lista esta vazia ou nao
+int lista_vazia(Lista *l);

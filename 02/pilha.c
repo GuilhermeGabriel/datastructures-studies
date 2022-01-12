@@ -21,45 +21,36 @@ void pilha_criar(Pilha** p){
 // Implementacao de uma funcao que insere no topo de uma pilha
 void pilha_inserir(Pilha* p, char* valor){
   // Insere no comeco da lista
-  insere_comeco(p, valor);
+  lista_insere_comeco(p, valor);
 }
 
 // Implementacao da funcao que retorna o valor que esta
 // no topo da pilha
 char* pilha_valor_topo(Pilha* p){
-  // Topo da pilha eh igual ao proximo
-  // elemento apos o no cabeca da lista
-  Pilha *aux = p->prox;
-
-  // Se ele nao for nulo retorna seu valor, caso contrario
-  // retorna "cabeca", para indicar que so ha o noh cabeca 
-  if(aux!=NULL) return aux->v;
-  else return "cabeca";
+  // Pegar o topo da pilha eh
+  // o mesmo que pegar o comeco da lista
+  return lista_valor_comeco(p);
 }
 
 // Implementacao da funcao que remove o topo da pilha
 void pilha_remover(Pilha* p){
   // Remover topo da pilha eh o mesmo que remover o 
   // comeco da lista apos o no cabeca
-  remove_comeco(p);
+  lista_remove_comeco(p);
 }
 
-// Implementacao da funcao que retorna se a lista esta vazia ou nao
+// Implementacao da funcao que retorna se a pilha esta vazia ou nao
 int pilha_vazia(Pilha* p){
-  // Pega o primeiro elemento apos o noh cabeca
-  Pilha *aux = p->prox;
-
-  // Se ele for nulo, retorna 1 (lista vazia), caso contrario
-  // retorna 0, (lista nao vazia)
-  if(aux!=NULL) return 0;
-  else return 1;
+  // A pilha é um tipo de lista, verificar se ela esta vazia é o mesmo 
+  // verificar que a lista estar vazia
+  return lista_vazia(p);
 }
 
 // Implementacao de uma funcao que imprime os noh's
 // de uma pilha na ordem em que estao naturalmente
 void pilha_imprimir_ordem_natural(Pilha* p){
   // Cria uma pilha auxiliar
-  Pilha *Aux;pilha_criar(&Aux);
+  Pilha *Aux; pilha_criar(&Aux);
 
   // Remove elemento a elemento do topo da pilha
   // e adicionando-o em uma pilha auxiliar para no futuro

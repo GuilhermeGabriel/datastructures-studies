@@ -30,7 +30,7 @@ void cria_lista(Lista **l){
 }
 
 // Implementacao de uma funcao que insere no comeco da lista
-void insere_comeco(Lista *l, char* valor){
+void lista_insere_comeco(Lista *l, char* valor){
   // Alocacao de memoria para armazenar o item
   Lista *q = (Lista*) malloc(sizeof(Lista));
 
@@ -44,8 +44,20 @@ void insere_comeco(Lista *l, char* valor){
   l->prox = q;
 }
 
+// Implementacao de uma funcao que retorna o valor no comeco da lista
+char* lista_valor_comeco(Lista* l){
+  // Primeiro valor da lista eh igual ao proximo
+  // elemento apos o no cabeca da lista
+  Lista *aux = l->prox;
+
+  // Se ele nao for nulo retorna seu valor, caso contrario
+  // retorna "cabeca", para indicar que so ha o noh cabeca 
+  if(aux!=NULL) return aux->v;
+  else return "cabeca";
+}
+
 // Implementacao de uma funcao que remove o comeco da lista
-void remove_comeco(Lista *l){
+void lista_remove_comeco(Lista *l){
   // Cria um ponteiro auxiliar q
   Lista *q;
 
@@ -61,6 +73,17 @@ void remove_comeco(Lista *l){
     // Libera o ponteiro auxiliar
     free(q);
   }
+}
+
+// Implementacao que verifica se a lista esta vazia ou nao
+int lista_vazia(Lista *l){
+  // Pega o primeiro elemento apos o noh cabeca
+  Lista *aux = l->prox;
+
+  // Se ele for nulo, retorna 1 (lista vazia), caso contrario
+  // retorna 0, (lista nao vazia)
+  if(aux!=NULL) return 0;
+  else return 1;
 }
 
 // Implementacao de uma funcao que libera a lista
