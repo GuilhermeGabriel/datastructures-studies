@@ -1,3 +1,4 @@
-2
+3
+6 ABCDEF CBAEDF
 3 xYz Yxz
 3 abc cba
