@@ -1,0 +1,6 @@
+5 5
+link 4 5
+link 3 4
+link 2 3
+link 1 2
+lca 1 2
