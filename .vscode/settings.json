@@ -2,7 +2,8 @@
   "files.associations": {
     "stdio.h": "c",
     "stdlib.h": "c",
-    "lista.h": "c"
+    "lista.h": "c",
+    "digrafo_lista_peso.h": "c"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }

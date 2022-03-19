@@ -17,8 +17,8 @@ void destruir_digrafo(Grafo *p);
 void inserir_arco(Grafo *p, int u, int v, int w);
 void remover_arco(Grafo *p, int u, int v);
 
-int tem_arco(Grafo *p, int u, int v);
+//int tem_arco(Grafo *p, int u, int v);
 void imprimir_arcos(Grafo *g);
-int* dijkstra(Grafo *p, int u);
+int* dijkstra_prioridade_dist_par(Grafo *p, int u);
 
 #endif
