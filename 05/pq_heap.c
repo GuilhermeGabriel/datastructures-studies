@@ -19,6 +19,7 @@ PQ* pq_criar(int tam){
 
 void pq_destruir(PQ **p) {
   free((*p)->dados);
+  free((*p)->idxs_vertices_heap);
   free(*p);
   *p = NULL;
 }
@@ -28,56 +29,28 @@ int prioridade(PQ *p, int v){
   return p->dados[idx_vertice_dados].priority;
 }
 
-/*
-void set_dist_par_impar(PQ *p, int v, int par, int impar){
-  int idx_vertice_dados=p->idxs_vertices_heap[v];
-  p->dados[idx_vertice_dados].dist_par=par;
-  p->dados[idx_vertice_dados].dist_impar=impar;
-}
-
-int dist_par(PQ *p, int v){
-  int idx_vertice_dados=p->idxs_vertices_heap[v];
-  return p->dados[idx_vertice_dados].dist_par;
-}
-
-int dist_impar(PQ *p, int v){
-  int idx_vertice_dados=p->idxs_vertices_heap[v];
-  return p->dados[idx_vertice_dados].dist_impar;
-}*/
-
 void pq_muda_prioridade(PQ *p, int ver, int priority){
   int idx_vertice_dados=p->idxs_vertices_heap[ver];
   p->dados[idx_vertice_dados].priority=priority;
 
-  if(/*idx_vertice_dados==0 || */p->dados[PAI(idx_vertice_dados)].priority < p->dados[idx_vertice_dados].priority){
+  if(p->dados[PAI(idx_vertice_dados)].priority < p->dados[idx_vertice_dados].priority){
     desce_no_heap(p, idx_vertice_dados);
   }else{
     sobe_no_heap(p, idx_vertice_dados);
   }
-
 }
 
 int pq_vazia(PQ *p) {
   return p->n == 0;
 }
 
-int pq_cheia(PQ *p) {
-  return p->n == p->tam;
-}
-
-void pq_adicionar(PQ *p, int v, int priority, int dist_par, int dist_impar){
+void pq_adicionar(PQ *p, int v, int priority){
   t_item item;
   item.priority=priority;
-  item.dist_par=dist_par;
-  item.dist_impar=dist_impar;
   item.vertice=v;
 
   p->dados[p->n] = item;
-
-  //
   p->idxs_vertices_heap[item.vertice]=p->n;
-  //
-
   p->n++;
   sobe_no_heap(p, p->n - 1);
 }

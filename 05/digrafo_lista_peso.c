@@ -11,6 +11,24 @@ Grafo* criar_digrafo(int n) {
   return g;
 }
 
+void reconstroi_grafo(Grafo* p, Grafo *g){
+  for(int i=0;i<p->n;i++){
+    No *t;
+    for (t = p->L[i]; t != NULL; t = t->prox){
+      int vizinho_de_i = t->v;
+      int p1 = t->peso;
+
+       No *u;
+       for (u = p->L[vizinho_de_i]; u != NULL; u = u->prox){
+        int adj = u->v;
+        int p2 = u->peso;
+
+        if(adj!=i)inserir_arco(g,i,adj,p1+p2);
+       }
+    }
+  }
+}
+
 void destruir_digrafo(Grafo *g) {
   for(int i=0;i<g->n;i++)destruir_lista(g->L[i]); 
   free(g->L);
@@ -21,52 +39,31 @@ void inserir_arco(Grafo *p, int u, int v, int peso) {
   p->L[u] = inserir_na_lista(p->L[u], v, peso);
 }
 
-void remover_arco(Grafo *p, int u, int v) {
-  p->L[u] = remover_da_lista(p->L[u], v);
-}
-
-void imprimir_arcos(Grafo *p) {
-  for (int u = 0; u < p->n; u++){
-    printf("%d: ", u); //imprime como um int
-    imprimir_lista(p->L[u]);
-  }
-}
-
-int* dijkstra_prioridade_dist_par(Grafo *p, int u){ // O(|V|+|E| lg(|V|))
-  int *pai = (int *)malloc(p->n * sizeof(int));
-  int *processado = (int*)malloc(p->n * sizeof(int));
-  int *dist_copy = (int*)malloc(p->n * sizeof(int));
-  int *visp = (int*)malloc(p->n * sizeof(int));
+int dijkstra_quant_arest_par(Grafo *p, int u){
+  int *pai = (int*) malloc(p->n * sizeof(int));
+  int *distancia = (int*) malloc(p->n * sizeof(int));
+  int *vis = (int*) malloc(p->n * sizeof(int));
 
   PQ *Fila = pq_criar(p->n); // Heap de MIN
 
-  for (int v = 0; v < p->n; v++){ // O(|V|lg|V|)
-    pai[v] = -1;
-    dist_copy[v]=-1;
-    visp[v]=0;
-    //processado[v]=0;
-    pq_adicionar(Fila, v, INT_MAX, INT_MAX, INT_MAX); // O(lg|V|)
+  for (int v = 0; v < p->n; v++){
+    pai[v]=-1;
+    distancia[v]=-1;
+    vis[v]=0;
+    pq_adicionar(Fila, v, INT_MAX);
   }
 
   pai[u] = u;
   pq_muda_prioridade(Fila, u, 0);
-  //set_dist_par_impar(Fila, u, 0, INT_MAX);
   
-  while (!pq_vazia(Fila)){ // O(|E|lg|V|)
-    t_item aux = pq_extrai_minimo(Fila);//Fila->dados[0];//(Fila);
+  while (!pq_vazia(Fila)){
+    t_item aux = pq_extrai_minimo(Fila);
     int v = aux.vertice;
     int dist_v = prioridade(Fila, v);
 
-    dist_copy[v]=dist_v;
+    distancia[v] = dist_v;
     
-    //if(dist_v == INT_MAX)break;
-
-    int dist_v_impar = dist_impar(Fila, v);
-    int dist_v_par = dist_par(Fila, v);
-
-    //if(d>dist[v].F and d>dist[v].S)continue;
-    if (processado[v]) continue;
-    processado[v] = 1;
+    if(dist_v == INT_MAX)break;
 
     No *t;
     for (t = p->L[v]; t != NULL; t = t->prox){
@@ -74,42 +71,31 @@ int* dijkstra_prioridade_dist_par(Grafo *p, int u){ // O(|V|+|E| lg(|V|))
       int peso = t->peso;
 
       if (dist_v + peso < prioridade(Fila, w)){
-        pq_muda_prioridade(Fila, w, dist_v+peso); // O(lg|V|)
+        pq_muda_prioridade(Fila, w, dist_v+peso);
         pai[w] = v;
       }
-
-/*
-      if (dist_v_impar + peso < dist_par(Fila, w)){
-        set_dist_par_impar(Fila, w, dist_v_par+peso, dist_v_impar);
-      }
-
-      if (dist_v_par + peso < dist_impar(Fila, w)){
-        set_dist_par_impar(Fila, w, dist_v_par, dist_v_impar+peso);
-      }*/
     }
-    //if(pq_vazia(Fila))
   }
     
-  // for(int i=0;i<6;i++)
-  //  printf("%d\n",Fila->dados[i].priority);  
-
-  int *res = pai;
- //int atual=res[c-1],ant=-1,antant=-1;
-  int atual=res[Fila->tam-1];
+  int atual=pai[p->n-1];
   while(atual!=0){
-    if(visp[atual])break;
-    else visp[atual]=1;
-
-    atual=res[atual];
+    if(atual==-1||vis[atual])break;
+    else vis[atual]=1;
+    atual=pai[atual];
   }
 
-  if(atual!=0 || dist_copy[Fila->tam-1]==INT_MAX){
-    printf("-1\n");
+  int resultado;
+  if(atual!=0 || distancia[p->n-1]==INT_MAX){
+    resultado = -1;
   }else{
-    printf("%d\n",dist_copy[Fila->tam-1]);
+    resultado = distancia[p->n-1];
   }
 
   pq_destruir(&Fila);
   
-  return pai;
+  free(pai);
+  free(distancia);
+  free(vis);  
+
+  return resultado;
 }

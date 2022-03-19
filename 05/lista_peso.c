@@ -21,34 +21,3 @@ No* inserir_na_lista(No *p, int x, int w) {
   return novo;
 }
 
-No* remover_da_lista(No* p, int x) {
-  No *proximo;
-  if (p == NULL)
-    return NULL;
-  else if (p->v == x) {
-    proximo = p->prox;
-    free(p);
-    return proximo;
-  } else {
-    p->prox = remover_da_lista(p->prox, x);
-    return p;
-  }
-}
-
-int buscar_valor(No *p, int x) {
-  while(p != NULL){
-    if (p->v == x) return p->peso;
-    p = p->prox;
-  }
-return 0;
-}
-
-int imprimir_lista(No *p) {
-  while(p != NULL){
-    printf("%d (%d) ", p->v, p->peso); //imprime como um char
-    if(p->prox!=NULL) printf("-> ");
-    p = p->prox;
-  }
-  printf("\n");
-return 0;
-}

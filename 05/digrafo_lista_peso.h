@@ -14,11 +14,9 @@ typedef struct {
 Grafo* criar_digrafo(int n);
 void destruir_digrafo(Grafo *p);
 
+void reconstroi_grafo(Grafo* p, Grafo* g);
 void inserir_arco(Grafo *p, int u, int v, int w);
-void remover_arco(Grafo *p, int u, int v);
 
-//int tem_arco(Grafo *p, int u, int v);
-void imprimir_arcos(Grafo *g);
-int* dijkstra_prioridade_dist_par(Grafo *p, int u);
+int dijkstra_quant_arest_par(Grafo *p, int u);
 
 #endif
