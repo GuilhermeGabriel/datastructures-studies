@@ -27,7 +27,7 @@ Grafo* criar_digrafo(int n);
 // o digrafo da memoria.
 void destruir_digrafo(Grafo *p);
 
-// Definicao de uma funcao que cria um reconstroi um digrafo
+// Definicao de uma funcao que reconstroi um digrafo
 // seguindo a regra onde a aresta(a,b,p1) e aresta(b,c,p2) do digrafo recebido
 // ira se tornar a aresta(a,c,p1+p2) do digrafo reconstruido.
 void reconstroi_grafo(Grafo* p, Grafo* g);

@@ -68,7 +68,7 @@ int prioridade(PQ *p, int v){
 // Implementacao de uma funcao que altera a
 // prioridade de um elemento da heap. 
 void pq_muda_prioridade(PQ *p, int ver, int priority){
-  // Eh usado o vetor de indices para acessar em O(1) o elemento na heap
+  // Eh usado o vetor de indices para acessar em O(1) o elemento (vertice) na heap
   int idx_vertice_dados=p->idxs_vertices_heap[ver];
 
   // Altera-se sua prioridade

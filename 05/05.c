@@ -24,8 +24,8 @@ int main(){
   for(int i=0;i<v;i++){
     scanf("%d %d %d", &a, &b, &p); // Faz leitura do vertice a e b e peso p
     
-    // Como eh uma estrada de uma rodovia, eh possivel ir e voltar, logo devemos inserir
-    // o arco de ida e volta.
+    // Como eh uma estrada de uma rodovia, eh possivel ir e voltar, 
+    // logo devemos inserir o arco de ida e volta.
 
     inserir_arco(Aux,a-1,b-1,p); // Insere arco de a para b e o peso para ir de a para b
     inserir_arco(Aux,b-1,a-1,p); // Insere arco de b para a e o peso para ir de b para a

@@ -32,7 +32,7 @@ Grafo* criar_digrafo(int n) {
   return g;
 }
 
-// Implementacao de uma funcao que cria um reconstroi um digrafo
+// Implementacao de uma funcao que reconstroi um digrafo
 // seguindo a regra onde a aresta(a,b,p1) e aresta(b,c,p2) do digrafo recebido
 // ira se tornar a aresta(a,c,p1+p2) do digrafo reconstruido.
 void reconstroi_grafo(Grafo* p, Grafo *g){
@@ -103,8 +103,8 @@ int dijkstra_quant_arest_par(Grafo *p, int u){
   // Cria a heap com tamanho n (heap de min), seu tamanho nao eh aumentado.
   PQ *Fila = pq_criar(p->n);
 
-  // Preenche o vetor de pais, de distancia, 
-  // de visitados, e a fila de prioridade com os vertices
+  // Preenche o vetor de pais, de distancia e de visitados.
+  // Preenche a fila de prioridade com os vertices,
   // todos com distancia infinita seguindo a logica do dijkstra.
   for (int v = 0; v < p->n; v++){
     pai[v]=-1;
@@ -122,8 +122,7 @@ int dijkstra_quant_arest_par(Grafo *p, int u){
   
   // Enquanto a fila de prioridade nao for vazia
   while (!pq_vazia(Fila)){
-    // Extrai o valor com maior prioridade (menor distancia)
-    // da fila.
+    // Extrai o valor com maior prioridade (menor distancia) da fila.
     t_item aux = pq_extrai_minimo(Fila);
     int v = aux.vertice;
     int dist_v = prioridade(Fila, v);
@@ -131,7 +130,7 @@ int dijkstra_quant_arest_par(Grafo *p, int u){
     // Salva a distancia ate esse vertice que foi removido da fila de prioridades
     distancia[v] = dist_v;
     
-    // Se eu for removido um vertice com distancia infinita
+    // Se for removido um vertice com distancia infinita
     // estamos tratando de um outro grafo, logo podemos finalizar o dijkstra
     // pois nao tera caminho de um grafo ate esse outro grafo, todos terao distancia infinita.
     if(dist_v == INT_MAX)break;
@@ -153,9 +152,9 @@ int dijkstra_quant_arest_par(Grafo *p, int u){
     }
   }
   
-  // Como o problema quer saber se eh possivel sair da primeira cidade
+  // O problema quer saber se eh possivel sair da primeira cidade
   // e ir ate a ultima cidade passando por um numero par de pedagios.
-  // Se comecando do ultimo vertice conseguimos chegar na primeira (vertice 0)
+  // Se comecando do ultimo vertice conseguimos chegar no primeiro (vertice 0)
   // basta imprimir a distancia para chegar no ultimo vertice, caso nao exista
   // um caminho, basta imprimirmos -1.
   int atual=pai[p->n-1];
@@ -174,7 +173,7 @@ int dijkstra_quant_arest_par(Grafo *p, int u){
   }else{
     // Caso contrario, eh possivel sair da primeira cidade e ir ate a ultima
     // basta imprimir a distancia ate a ultima, pois o grafo foi reconstuido
-    // em caminhos pares.
+    // em caminhos em que cada aresta representa um par de arestas.
     resultado = distancia[p->n-1];
   }
 
@@ -186,6 +185,6 @@ int dijkstra_quant_arest_par(Grafo *p, int u){
   free(distancia);
   free(vis);  
 
-  // retorna o resultado.
+  // retorna o resultado
   return resultado;
 }
