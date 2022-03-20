@@ -98,11 +98,11 @@ void pq_adicionar(PQ *p, int v, int priority){
   
   // Seta ele no final do array de dados da heap
   p->dados[p->n] = item;
-  p->n++;
 
   // Atualiza sua posicao na heap la no array de indices 
   p->idxs_vertices_heap[item.vertice]=p->n;
 
+  p->n++;
   // Chama a funcao sobe_na_heap corrigindo a heap
   sobe_no_heap(p, p->n - 1);
 }
